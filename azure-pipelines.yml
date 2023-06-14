@@ -9,11 +9,29 @@ trigger:
 pool:
   name: WindowsTesting
 
-steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
+stages:
+    - stage: BuildingJavaCode
+      jobs:
+      - job: BuildingJavaCodeJob
+        timeoutInMinutes: 10
+        steps:
+        - script: echo $(Build.BuildId)
+          displayName: 'Display The Build-ID'
 
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
+        - script: ls -al && pwd
+          displayName: 'List Files & Current Working Directory'
+        
+        - script: ls -al && chmod 700 build.sh && sudo bash ./build.sh && ls -al
+          displayName: 'Run the build script'
+        
+        - script: ls -al && mv ROOT.war ROOT$(Build.BuildId).war && ls -al
+          displayName: 'List Files & Rename ROOT.war'
+     
+        - script: cp ROOT$(Build.BuildId).war /artifacts && ls -al /artifacts
+          displayName: 'Copy WAR to tmp folder'
+        - task: CopyFiles@2
+          inputs:
+            Contents: 'ROOT$(Build.BuildId).war'
+            TargetFolder: '$(Build.ArtifactStagingDirectory)'
+            OverWrite: true
+          displayName: 'Copying WAR file to ArtifactStagingDirector'
