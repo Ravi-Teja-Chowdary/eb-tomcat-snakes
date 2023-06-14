@@ -21,7 +21,7 @@ stages:
         # - script: pwd
         #   displayName: 'List Files & Current Working Directory'
         
-        - script: chmod 700 build.sh ; sudo bash ./build.sh 
+        - script: ./build.sh 
           displayName: 'Run the build script'
         
         - script: ls ; mv ROOT.war ROOT$(Build.BuildId).war 
