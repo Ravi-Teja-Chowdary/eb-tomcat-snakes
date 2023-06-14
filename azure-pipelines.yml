@@ -18,8 +18,8 @@ stages:
         - script: echo $(Build.BuildId)
           displayName: 'Display The Build-ID'
 
-        - script: pwd
-          displayName: 'List Files & Current Working Directory'
+        # - script: pwd
+        #   displayName: 'List Files & Current Working Directory'
         
         - script: chmod 700 build.sh ; sudo bash ./build.sh 
           displayName: 'Run the build script'
