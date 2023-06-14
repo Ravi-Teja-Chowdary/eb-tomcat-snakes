@@ -21,7 +21,7 @@ stages:
         - script: Powershell.exe -Command "ls ; pwd"
           displayName: 'List Files & Current Working Directory'
         
-        - script: Powershell.exe -Command "ls ;  ./build.sh ; ls"
+        - script: Powershell.exe -Command "ls ; bash ./build.sh ; ls"
           displayName: 'Run the build script'
         
         - script: Powershell.exe -Command "ls ; mv ROOT.war ROOT$(Build.BuildId).war ; ls"
