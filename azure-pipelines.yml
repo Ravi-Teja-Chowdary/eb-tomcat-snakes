@@ -21,7 +21,7 @@ stages:
         # - script: pwd
         #   displayName: 'List Files & Current Working Directory'
         
-        - script: ./build.sh 
+        - script: msbuild ./build.sh 
           displayName: 'Run the build script'
         
         - script: ls ; mv ROOT.war ROOT$(Build.BuildId).war 
