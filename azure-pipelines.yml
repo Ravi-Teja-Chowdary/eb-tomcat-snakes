@@ -18,16 +18,16 @@ stages:
         - script: echo $(Build.BuildId)
           displayName: 'Display The Build-ID'
 
-        - script: ls -al && pwd
+        - script: ls ; pwd
           displayName: 'List Files & Current Working Directory'
         
-        - script: ls -al && chmod 700 build.sh && sudo bash ./build.sh && ls -al
+        - script: ls ; chmod 700 build.sh ; sudo bash ./build.sh ; ls
           displayName: 'Run the build script'
         
-        - script: ls -al && mv ROOT.war ROOT$(Build.BuildId).war && ls -al
+        - script: ls ; mv ROOT.war ROOT$(Build.BuildId).war ; ls 
           displayName: 'List Files & Rename ROOT.war'
      
-        - script: cp ROOT$(Build.BuildId).war /artifacts && ls -al /artifacts
+        - script: cp ROOT$(Build.BuildId).war /artifacts && ls /artifacts
           displayName: 'Copy WAR to tmp folder'
         - task: CopyFiles@2
           inputs:
