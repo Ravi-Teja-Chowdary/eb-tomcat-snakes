@@ -23,3 +23,15 @@ stages:
         
         - script: ls -al && chmod 700 build.sh && sudo bash ./build.sh && ls -al
           displayName: 'Run the build script'
+
+        - script: ls -al && mv ROOT.war ROOT$(Build.BuildId).war && ls -al
+          displayName: 'List Files & Rename ROOT.war'
+     
+        - script: cp ROOT$(Build.BuildId).war /agent/testdir && ls -al /agent/testdir
+          displayName: 'Copy WAR to testdir folder'
+        # - task: CopyFiles@2
+        #   inputs:
+        #     Contents: 'ROOT$(Build.BuildId).war'
+        #     TargetFolder: '$(Build.ArtifactStagingDirectory)'
+        #     OverWrite: true
+        #   displayName: 'Copying WAR file to ArtifactStagingDirector'          
