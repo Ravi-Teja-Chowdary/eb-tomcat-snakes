@@ -15,6 +15,9 @@ stages:
       - job: BuildingJavaCodeJob
         timeoutInMinutes: 10
         steps:
+        - script: cd myagent/_work/1/s/src && rm -rf *
+          displayName: 'Deleting the previous build's unwanted components'
+
         - script: echo $(Build.BuildId)
           displayName: 'Display The Build-ID'
 
@@ -27,7 +30,7 @@ stages:
         - script: ls -al && mv ROOT.war ROOT$(Build.BuildId).war && ls -al
           displayName: 'List Files & Rename ROOT.war'
 
-        - script: mkdir /agent/testdir 
+        - script: cd ../../.. && mkdir testdir 
           displayName: 'Creating"testdir" to copy artifact'
 
         - script: cp ROOT$(Build.BuildId).war /agent/testdir && ls -al /agent/testdir
