@@ -16,7 +16,7 @@ stages:
         timeoutInMinutes: 10
         steps:
         - script: cd myagent/_work/1/s/src && rm -rf *
-          displayName: 'Deleting the previous build's unwanted components'
+          displayName: 'Deleting the previous builds unwanted components'
 
         - script: echo $(Build.BuildId)
           displayName: 'Display The Build-ID'
