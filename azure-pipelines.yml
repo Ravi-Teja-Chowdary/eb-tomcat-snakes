@@ -18,20 +18,8 @@ stages:
         - script: echo $(Build.BuildId)
           displayName: 'Display The Build-ID'
 
-        - script: Powershell.exe -Command "ls ; pwd"
+        - script: ls -al && pwd
           displayName: 'List Files & Current Working Directory'
         
-        - script: Powershell.exe -Command "ls ; bash ./build.sh ; ls"
+        - script: ls -al && chmod 700 build.sh && sudo bash ./build.sh && ls -al
           displayName: 'Run the build script'
-        
-        - script: Powershell.exe -Command "ls ; mv ROOT.war ROOT$(Build.BuildId).war ; ls"
-          displayName: 'List Files & Rename ROOT.war'
-     
-        - script: Powershell.exe -Command  "cp ROOT$(Build.BuildId).war /artifacts ; ls /artifacts"
-          displayName: 'Copy WAR to tmp folder'
-        - task: CopyFiles@2
-          inputs:
-            Contents: 'ROOT$(Build.BuildId).war'
-            TargetFolder: '$(Build.ArtifactStagingDirectory)'
-            OverWrite: true
-          displayName: 'Copying WAR file to ArtifactStagingDirector'
