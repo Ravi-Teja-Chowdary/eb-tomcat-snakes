@@ -27,11 +27,21 @@ stages:
         - script: ls -al && mv ROOT.war ROOT$(Build.BuildId).war && ls -al
           displayName: 'List Files & Rename ROOT.war'
 
-        - script: cd ../../.. && mkdir testdir 
-          displayName: 'Creating"testdir" to copy artifact'
-
-        - script: cp ROOT$(Build.BuildId).war /agent/testdir && ls -al /agent/testdir
+        - script: cp ROOT$(Build.BuildId).war /home/ubuntu/agent/testdir && ls -al /home/ubuntu/agent/testdir
           displayName: 'Copy WAR to testdir folder'
+
+    - stage: DeleteTheRepo
+      jobs:
+      - job: DeleteTheRepoCntent
+        timeoutInMinutes: 10
+        steps:
+         - checkout: none
+         - script: cd /home/ubuntu/agent/_work/1/s && sudo rm -rf src
+           displayName: 'Remove Files'
+
+        #  - script: cd /artifacts && sudo rm -f *.war
+        #    displayName: 'Remove Files From tmp Folder'
+          
         # - task: CopyFiles@2
         #   inputs:
         #     Contents: 'ROOT$(Build.BuildId).war'
