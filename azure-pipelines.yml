@@ -26,7 +26,10 @@ stages:
 
         - script: ls -al && mv ROOT.war ROOT$(Build.BuildId).war && ls -al
           displayName: 'List Files & Rename ROOT.war'
-     
+
+        - script: mkdir /agent/testdir 
+          displayName: 'Creating"testdir" to copy artifact'
+
         - script: cp ROOT$(Build.BuildId).war /agent/testdir && ls -al /agent/testdir
           displayName: 'Copy WAR to testdir folder'
         # - task: CopyFiles@2
