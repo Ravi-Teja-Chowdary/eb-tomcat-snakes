@@ -27,7 +27,7 @@ stages:
         - script: ls -al && mv ROOT.war ROOT$(Build.BuildId).war && ls -al
           displayName: 'List Files & Rename ROOT.war'
 
-        - script: cp ROOT$(Build.BuildId).war /home/ubuntu/agent/testdir && ls -al /home/ubuntu/agent/testdir
+        - script: cp ROOT$(Build.BuildId).war /home/ubuntu/myagent/testdir && ls -al /home/ubuntu/myagent/testdir
           displayName: 'Copy WAR to testdir folder'
 
     - stage: DeleteTheRepo
@@ -36,7 +36,7 @@ stages:
         timeoutInMinutes: 10
         steps:
          - checkout: none
-         - script: cd /home/ubuntu/agent/_work/1/s && sudo rm -rf src
+         - script: cd /home/ubuntu/myagent/_work/1/s && sudo rm -rf src
            displayName: 'Remove Files'
 
         #  - script: cd /artifacts && sudo rm -f *.war
